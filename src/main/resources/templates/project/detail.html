@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>应用详情</title>
+    <script type="text/javascript" src="../static/ext/jquery.min.js" th:src="@{/ext/jquery.min.js}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{/ext/mdl/material.min.css}" href="../../static/ext/mdl/material.min.css"/>
+    <script type="text/javascript" src="../../static/ext/mdl/material.min.js"
+            th:src="@{/ext/mdl/material.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/detail.css}" href="../../static/css/detail.css"/>
+</head>
+<body>
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">APP发布平台</span>
+            <span>&nbsp;&nbsp;>&nbsp;&nbsp;</span>
+            <a href="/" class="nav">我的应用</a>
+            <span>&nbsp;&nbsp;>&nbsp;&nbsp;</span>
+            <span th:text="${p.name}"></span>
+        </div>
+    </header>
+    <main class="mdl-layout__content"
+          style="margin: 20px;margin-left: 80px;margin-right: 80px;background-color: #fff3e0">
+        <div class="mdl-card" style="padding: 30px;width: 100%">
+            <img id="img" style="width: 100px; height: 100px;" src="" th:src="${p.icon}"/>
+            <div style="width: 100px;margin-top: 20px;">
+                <button class="mdl-button mdl-js-button">
+                    上传新版本
+                </button>
+                <button id="preview" class="mdl-button mdl-js-button">
+                    &nbsp;&nbsp;&nbsp;&nbsp;预&nbsp;&nbsp;览&nbsp;&nbsp;&nbsp;&nbsp;
+                </button>
+            </div>
+        </div>
+
+        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+            <div class="mdl-tabs__tab-bar">
+                <a href="#update-history" class="mdl-tabs__tab is-active">更新历史</a>
+                <a href="#app-info" class="mdl-tabs__tab">基本信息</a>
+            </div>
+
+            <div class="mdl-tabs__panel is-active" id="update-history">
+                <ul class="mdl-list" style="margin: 20px">
+                    <li th:each="v : ${vs}">
+                        <div class="version" th:text="${v.buildName}">fdsfs</div>
+                        <div class="time" th:text="${#dates.format(v.date, 'yyyy-MM-dd HH:mm:ss')}">2016-10-05
+                            01:38:29
+                        </div>
+                        <pre class="ulogs" th:text="${v.ulogs}">fdsfsfsfsafd</pre>
+                        <!--<div><a href="#">biaoji</a><a href="#">biaoji</a></div>-->
+                    </li>
+                </ul>
+            </div>
+            <div class="mdl-tabs__panel" id="app-info" style="margin: 30px;">
+                <input type="hidden" id="pkName" th:value="${p.pkName}"/>
+                <div class="field">
+                    <label>应用名称</label><input id="appName" th:value="${p.name}" type="text"/>
+                </div>
+                <div class="field">
+                    <label>短链接</label><span th:text="${basePath}"></span></span><input id="shortUrl"
+                                                                                       th:value="${p.shortUrl}"
+                                                                                       type="text"/>
+                </div>
+                <div class="field">
+                    <label>应用描述</label>
+                    <textarea id="appDesc" th:text="${p.appDesc}" rows="4" type="text"/>
+                </div>
+                <div style="margin-top:30px;">
+                    <button id="save"
+                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                        保存
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script th:inline="javascript">
+    document.querySelector('#preview').addEventListener('click', function () {
+        window.open([['/' +${p.shortUrl}]], '_blank');
+    });
+    document.querySelector('#save').addEventListener('click', function () {
+        var postData = {
+            "pkName": document.querySelector('#pkName').value,
+            "appName": document.querySelector('#appName').value,
+            "shortUrl": document.querySelector('#shortUrl').value,
+            "appDesc": document.querySelector('#appDesc').value
+        };
+        console.log(postData);
+        $.ajax({
+            url: '/project/add',
+            type: 'POST',
+            data: JSON.stringify(postData),
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (data, status, xhr) {
+                if (data.status == 0)
+                    window.location.reload();
+            },
+            error: function (xhr, error, exception) {
+                alert(exception.toString());
+            }
+        });
+    });
+</script>
+</body>
+</html>

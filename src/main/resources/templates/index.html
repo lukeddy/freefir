@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Free fir.im</title>
+    <link rel="stylesheet" th:href="@{/ext/dz/dropzone.css}" href="../static/ext/dz/dropzone.css"/>
+    <script type="text/javascript" src="../static/ext/dz/dropzone.js" th:src="@{/ext/dz/dropzone.js}"></script>
+    <script type="text/javascript" src="../static/ext/jquery.min.js" th:src="@{/ext/jquery.min.js}"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{/ext/mdl/material.min.css}" href="../static/ext/mdl/material.min.css"/>
+    <script type="text/javascript" src="../static/ext/mdl/material.min.js"
+            th:src="@{/ext/mdl/material.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/index.css}" href="../static/css/index.css"/>
+    <script type="text/javascript" src="../static/ext/art/dialog-min.js" th:src="@{/ext/art/dialog-min.js}"></script>
+    <link rel="stylesheet" th:href="@{/ext/art/ui-dialog.css}" href="../static/ext/art/ui-dialog.css"/>
+</head>
+<body>
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">APP发布平台</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Link</a> <a class="mdl-navigation__link" href="">Link</a> <a
+                    class="mdl-navigation__link" href="">Link</a> <a class="mdl-navigation__link" href="">Link</a>
+            </nav>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">Title</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="">Link</a> <a class="mdl-navigation__link" href="">Link</a> <a
+                class="mdl-navigation__link" href="">Link</a> <a class="mdl-navigation__link" href="">Link</a>
+        </nav>
+    </div>
+    <main class="mdl-layout__content" style="margin: 20px;margin-left: 60px; margin-right: 60px">
+        <div id="dropz" class="dropzone"></div>
+        <div th:each="p : ${ps}" class="demo-card-square mdl-card mdl-shadow--2dp">
+            <img class="flex-item-img" th:src="${p.appIcon}"/>
+            <label th:text="${p.appName}"></label>
+            <table>
+                <tbody>
+                <tr>
+                    <td>短链接:</td>
+                    <td th:text="${p.shortUrl}"></td>
+                </tr>
+                <tr>
+                    <td>PackageName:</td>
+                    <td th:text="${p.pkName}"></td>
+                </tr>
+                <tr>
+                    <td>最新版本:</td>
+                    <td th:text="${p.buildName}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="mdl-card__actions mdl-card--border">
+                <a th:href="${'/project/' + p.id}"
+                   class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    编辑
+                </a>
+                <a th:href="${'/' + p.shortUrl}" style="float: right"
+                   class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    预览
+                </a>
+            </div>
+        </div>
+    </main>
+</div>
+<div id="dialog" class="mdl-dialog">
+</div>
+<script type="text/javascript" src="../static/js/index.js" th:src="@{/js/index.js}"></script>
+</body>
+</html>

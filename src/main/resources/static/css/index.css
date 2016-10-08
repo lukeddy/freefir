@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+.demo-layout-transparent {
+    /*background: url('../img/transparent.jpg') center / cover;*/
+    background: #1e88e5 center / cover;
+}
+
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+       your background is light. */
+    color: white;
+}
+
+.demo-card-square.mdl-card {
+    width: 30%;
+    float: left;
+    /*height: 370px;*/
+    margin: 20px 1.6% 0 1.6%;
+}
+
+.demo-card-square > .mdl-card__title {
+    color: #fff;
+    background: bottom right 15% no-repeat #46B6AC;
+}
+
+.demo-card-square > label {
+    font-size: medium;
+    font-style: oblique;
+    font-weight: bold;
+    color: #9fa8da;
+    margin: 20px 0 0 20px;
+}
+
+.flex-item-img {
+    width: 100px;
+    height: 100px;
+    margin: 20px 20px;
+}
+
+table {
+    font-size: small;
+    margin: 30px 20px;
+}
+
+input:focus {
+    cursor: pointer;
+    outline: none;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>应用预览</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" th:href="@{/ext/mdl/material.min.css}" href="../static/ext/mdl/material.min.css"/>
+    <script type="text/javascript" src="../static/ext/mdl/material.min.js"
+            th:src="@{/ext/mdl/material.min.js}"></script>
+</head>
+<body>
+<div align="center" style="margin: 80px; margin-bottom: 10px;">
+    <img src="" th:src="${p.icon}" style="width: 100px;height: 100px;"/>
+</div>
+<div align="center">
+    <b th:text="${p.appName}"></b>
+</div>
+<div align="center" style="margin: 60px">
+    <img src="" th:src="${p.qrUrl}" style="width: 150px;height: 150px;"/>
+</div>
+<div align="center" style="margin: 20px">
+    扫描二维码下载或用手机浏览器输入这个网址: <span th:text="${#httpServletRequest.getRequestURL()}"></span>
+</div>
+<hr/>
+<div align="center" class="mdl-card" style="width: 100%">
+    <span th:text="${p.buildName + ' - ' + p.appSize}">500.1226 (Build 1226) - 4.36 MB</span><br/>
+    <span th:text="${'更新于:'+#dates.format(p.date, 'yyyy-MM-dd HH:mm')}">更新于: 2016-10-05 01:38</span><br/>
+    <button id="down" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+        下载安装
+    </button>
+</div>
+<script th:inline="javascript">
+    document.querySelector('#down').addEventListener('click', function(){
+       window.open([[${p.downloadUrl}]],'_blank');
+    });
+</script>
+</body>
+</html>

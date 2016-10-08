@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+.demo-layout-transparent {
+    /*background: url('../img/transparent.jpg') center / cover;*/
+    background: #1e88e5 center / cover;
+}
+
+.demo-layout-transparent .mdl-layout__header,
+.demo-layout-transparent .mdl-layout__drawer-button {
+    /* This background is dark, so we set text to white. Use 87% black instead if
+       your background is light. */
+    color: white;
+}
+
+.version {
+    font-size: large;
+    font-style: oblique;
+}
+
+.time {
+    font-size: smaller;
+}
+
+.ulogs {
+    margin-top: 10px;
+}
+
+ul > li {
+    margin-bottom: 20px;
+}
+
+.nav {
+    font-size: 18px;
+    color: #FFF;
+    text-decoration: none;
+}
+
+.nav:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+.field {
+    margin-top: 40px;
+}
+
+.field > label {
+    display: inline-block;
+    width: 100px;
+}
